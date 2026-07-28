@@ -78,13 +78,25 @@ const { title = "Dr. Besen Roy Hull | Official Transmission Hub", clearance = "C
       <!-- Monitor Footer -->
       <footer class="relative z-20 flex items-center justify-between pt-5 mt-6 border-t border-slate-800 text-xs text-slate-500">
         <div class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-emerald-500/80 inline-block"></span>
-          <span class="font-mono">SIGNAL_STRENGTH: 99.8%</span>
+          <span class="h-2 w-2 rounded-full bg-emerald-500/80 inline-block animate-pulse"></span>
+          <span class="font-mono">SIGNAL_STRENGTH: <span id="signal-strength">88.4</span>%</span>
         </div>
         <span class="font-mono text-slate-600">v1.0.4-TACTICAL</span>
       </footer>
 
     </main>
 
+    <!-- Live Fluctuating Signal Script -->
+    <script is:inline>
+      setInterval(() => {
+        const signalEl = document.getElementById('signal-strength');
+        if (signalEl) {
+          // Generates a fluctuating number roughly between 84.0% and 92.5%
+          const base = 88.0;
+          const fluctuation = (Math.random() * 8.5) - 4.0; 
+          signalEl.textContent = (base + fluctuation).toFixed(1);
+        }
+      }, 3000); // Updates every 3 seconds
+    </script>
   </body>
 </html>
