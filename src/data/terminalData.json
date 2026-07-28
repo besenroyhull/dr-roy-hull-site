@@ -1,0 +1,33 @@
+{
+  "wireLogs": [
+    "[SECTOR_7B]: Unidentified cargo container recovered near Sector 4. Contains 400 lbs of high-grade synthetic caffeine.",
+    "[INCIDENT_LOG]: Operative Velch requested a hull inspection; maintenance team declined citing psychological fatigue.",
+    "[TEMPORAL_ALERT]: Non-linear causality drift detected in Sub-Sector 12. Chapter order currently fluxing.",
+    "[BEACON_COMM]: Incoming transmission from Deep Space Relay 9 intercepted. Signature matches Dr. Roy Hull's frequency.",
+    "[LOGISTICS_NOTE]: Supply depot #3 reports zero inventory of 'Velch's Strategic Coffee Mugs'. Requisition pending.",
+    "[SECURITY_WARN]: Unapproved attempt to calculate Velch's survival probability crashed local mainframe."
+  ],
+  "velchQuotes": [
+    "VELCH_LOG: 'It wasn't a tactical retreat. I simply preferred fighting from the next star system.'",
+    "VELCH_LOG: 'Mathematically, if I don't check the navigation sensors, the anomaly isn't there.'",
+    "ALERT: Grader Velch has been banned from Sector 4 mess halls due to condiment weaponization.",
+    "SYSTEM_NOTE: Velch's luck index remains statistically impossible. Primary probability algorithms offline."
+  ],
+  "hullQuotes": [
+    "DR_HULL_NOTE: 'Linear storytelling is a crutch for people who fear temporal paradoxes.'",
+    "ACADEMIC_MEMO: Reminding all operatives that Dr. Hull is pronounced BAY-sen. Violators will be reassigned.",
+    "DR_HULL_NOTE: 'If your chapter order makes sense chronologically, you aren't trying hard enough.'"
+  ],
+  "staticCommands": {
+    "help": "DIRECTIVES: 'velch', 'hull', 'matrix', '481', 'sudo', 'clearance', 'status', 'books', 'swag', 'clear'",
+    "481": "UNLOCKED: 'The Great Outer Rim Miscalculation involved 3 crates of fuel, a missing wrench, and two planetary surrenders.'",
+    "incident": "UNLOCKED: 'The Great Outer Rim Miscalculation involved 3 crates of fuel, a missing wrench, and two planetary surrenders.'",
+    "sudo": "ACCESS DENIED: User is not in the sudoers file. Incident reported to Security Sector 7.",
+    "status": "ALL_SYSTEMS_NOMINAL // DEFCON 4 // DEEP_SPACE_LINK: ACTIVE",
+    "clearance": "YOUR CLEARANCE: LEVEL 2 (GUEST OPERATIVE) // ELEVATION REQUEST: DENIED",
+    "about": "Dr. Besen Roy Hull — Chair of Non-Linear Galactic Narrative Strategy.",
+    "books": "REQUISITION_NOTE: Novel manuscripts are currently undergoing non-linear temporal sequence verification.",
+    "swag": "SUPPLIES_NOTE: Velch Tactical Patches & Field Coffee Mugs are currently in production queues.",
+    "coffee": "ALERT: Synthetic coffee dispensers operating at 88.4% capacity."
+  }
+}
