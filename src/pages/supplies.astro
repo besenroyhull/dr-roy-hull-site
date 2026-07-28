@@ -31,8 +31,21 @@ import suppliesData from '../data/suppliesData.json';
   <!-- Products Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
     {suppliesData.products.map((item) => (
-      <div class="bg-slate-950/80 border border-emerald-500/30 rounded p-4 flex flex-col justify-between hover:border-emerald-500/60 transition-colors">
+      <div class="bg-slate-950/80 border border-emerald-500/30 rounded p-4 flex flex-col justify-between hover:border-emerald-500/60 transition-colors group">
         <div>
+          <!-- Thumbnail Image Container -->
+          {item.imageUrl && (
+            <div class="w-full h-40 mb-3 bg-slate-900 border border-slate-800 rounded overflow-hidden relative flex items-center justify-center">
+              <img 
+                src={item.imageUrl} 
+                alt={item.title} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100" 
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-emerald-500/5 pointer-events-none"></div>
+            </div>
+          )}
+
           <!-- Status & Item Code -->
           <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-2">
             <span class="text-amber-400/90 font-bold">[{item.code}]</span>
