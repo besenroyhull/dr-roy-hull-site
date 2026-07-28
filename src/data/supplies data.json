@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "code": "ITEM_081-MUG",
+      "title": "Velch Tactical Coffee Mug",
+      "description": "Ceramic field container (11 oz). Engineered to withstand sub-sector diplomatic crises and low-grade caffeine thermal loss.",
+      "price": "18.00",
+      "inStock": true,
+      "checkoutUrl": "https://buy.stripe.com/your-stripe-link-here"
+    },
+    {
+      "code": "ITEM_081-PATCH",
+      "title": "Velch Logistics Insignia Patch",
+      "description": "Embroidered 3-inch tactical sleeve patch for operatives assigned to Sector 7B logistics divisions.",
+      "price": "12.00",
+      "inStock": true,
+      "checkoutUrl": "https://buy.stripe.com/your-stripe-link-here"
+    },
+    {
+      "code": "ITEM_081-TEE",
+      "title": "Chair of Non-Linear Strategy Tee",
+      "description": "Official faculty apparel. Soft-cotton jersey with tactical terminal schematics printed on high-entropy charcoal.",
+      "price": "28.00",
+      "inStock": true,
+      "checkoutUrl": "https://buy.stripe.com/your-stripe-link-here"
+    },
+    {
+      "code": "BOOK_001-VOL1",
+      "title": "The Legend of Grader Velch (Vol. 1)",
+      "description": "Hardcover & paperback manuscript. A non-linear comedic space opera concerning causality, luck, and tactical absurdity.",
+      "price": "24.99",
+      "inStock": false,
+      "checkoutUrl": "#"
+    }
+  ]
+}
