@@ -44,11 +44,91 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
     </p>
   </div>
 
-  <!-- Live Terminal Prompt & Blinking Cursor -->
-  <div class="flex items-center gap-2 text-xs sm:text-sm text-emerald-400 font-bold bg-slate-950/60 p-2.5 rounded border border-emerald-500/20">
-    <span class="text-emerald-500 font-black">&gt;</span>
-    <span>AWAITING_INPUT...</span>
-    <span class="terminal-cursor text-emerald-400 font-black">▋</span>
+  <!-- Interactive Terminal Console -->
+  <div class="bg-slate-950/80 p-3 rounded border border-emerald-500/30 text-xs sm:text-sm font-mono">
+    <!-- Output Scroll Area -->
+    <div id="terminal-output" class="max-h-36 overflow-y-auto space-y-1 mb-2 text-slate-400">
+      <div class="text-emerald-500/80">// Terminal session initialized. Type 'help' for available directives.</div>
+    </div>
+
+    <!-- Active Input Line -->
+    <div class="flex items-center gap-2 text-emerald-400 font-bold">
+      <span class="text-emerald-500 font-black">&gt;</span>
+      <input 
+        type="text" 
+        id="terminal-input" 
+        class="bg-transparent border-none outline-none flex-1 text-emerald-300 font-mono caret-emerald-400 p-0 m-0" 
+        placeholder="Type command..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
   </div>
+
+  <!-- Interactive Terminal Engine Script -->
+  <script is:inline>
+    const input = document.getElementById('terminal-input');
+    const output = document.getElementById('terminal-output');
+
+    // Customized responses for Dr. Roy Hull & Grader Velch lore
+    const velchQuotes = [
+      "VELCH_LOG: 'It wasn't a tactical retreat. I simply preferred fighting from the next star system.'",
+      "VELCH_LOG: 'Mathematically, if I don't check the navigation sensors, the anomaly isn't there.'",
+      "ALERT: Grader Velch has been banned from Sector 4 mess halls due to condiment weaponization.",
+      "SYSTEM_NOTE: Velch's luck index remains statistically impossible. Primary probability algorithms offline."
+    ];
+
+    const hullQuotes = [
+      "DR_HULL_NOTE: 'Linear storytelling is a crutch for people who fear temporal paradoxes.'",
+      "ACADEMIC_MEMO: Reminding all operatives that Dr. Hull is pronounced BAY-sen. Violators will be reassigned.",
+      "DR_HULL_NOTE: 'If your chapter order makes sense chronologically, you aren't trying hard enough.'"
+    ];
+
+    const commands = {
+      'help': "AVAILABLE COMMANDS: 'velch', 'hull', 'status', 'clearance', 'clear', 'about'",
+      'velch': () => velchQuotes[Math.floor(Math.random() * velchQuotes.length)],
+      'hull': () => hullQuotes[Math.floor(Math.random() * hullQuotes.length)],
+      'status': "ALL_SYSTEMS_NOMINAL // DEFCON 4 // DEEP_SPACE_LINK: ACTIVE",
+      'clearance': "YOUR CLEARANCE: LEVEL 2 (GUEST OPERATIVE) // ELEVATION REQUEST: DENIED",
+      'about': "Dr. Besen Roy Hull — Chair of Non-Linear Galactic Narrative Strategy.",
+    };
+
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          const rawCmd = this.value.trim();
+          const cmd = rawCmd.toLowerCase();
+          
+          if (!rawCmd) return;
+
+          // Append user command to log
+          const userLine = document.createElement('div');
+          userLine.className = "text-emerald-400 font-bold";
+          userLine.textContent = `> ${rawCmd}`;
+          output.appendChild(userLine);
+
+          // Process command
+          if (cmd === 'clear') {
+            output.innerHTML = '';
+          } else {
+            const respLine = document.createElement('div');
+            respLine.className = "text-slate-300 pl-3 border-l border-emerald-500/40";
+            
+            if (commands[cmd]) {
+              respLine.textContent = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+            } else {
+              respLine.className = "text-amber-400/90 pl-3 border-l border-amber-500/40";
+              respLine.textContent = `ERROR: Command '${rawCmd}' not recognized. Type 'help' for directory.`;
+            }
+            output.appendChild(respLine);
+          }
+
+          // Reset input & auto-scroll
+          this.value = '';
+          output.scrollTop = output.scrollHeight;
+        }
+      });
+    }
+  </script>
 
 </TerminalLayout>
