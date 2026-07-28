@@ -1,9 +1,13 @@
 ---
 // src/pages/index.astro
 import TerminalLayout from '../layouts/TerminalLayout.astro';
+import terminalData from '../data/terminalData.json';
 ---
 
 <TerminalLayout title="Dr. Besen Roy Hull | Official Transmission Hub" clearance="BEACON_ID: #481-B-HULL">
+
+  <!-- Matrix Rain Canvas Overlay -->
+  <canvas id="matrix-canvas" class="fixed inset-0 pointer-events-none z-50 opacity-0 transition-opacity duration-500"></canvas>
 
   <!-- Main Header Section -->
   <header class="mb-6">
@@ -16,7 +20,7 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
   </header>
 
   <!-- Tactile Navigation Hardware Grid -->
-  <nav class="grid grid-cols-2 gap-3 sm:gap-4 mb-7">
+  <nav class="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
     <a href="/dossier" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
       [01_DOSSIER]
     </a>
@@ -31,67 +35,102 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
     </a>
   </nav>
 
-  <!-- Living Terminal Log / Excerpt Box with Classified Redactions -->
-  <div class="bg-slate-950/90 border-l-4 border-emerald-500 p-4 sm:p-5 mb-6 rounded-r shadow-inner text-sm leading-relaxed text-slate-300">
-    <div class="text-[10px] text-amber-500 font-bold tracking-wider mb-2 uppercase">
-      [ INTERCEPTED_SIGNAL // SECTOR_7B ]
+  <!-- Dynamic Sector Log Wire -->
+  <div class="bg-slate-950/90 border border-emerald-500/30 rounded p-3 mb-6 text-xs font-mono">
+    <div class="flex justify-between items-center text-[10px] text-amber-500 font-bold mb-1 border-b border-slate-800 pb-1">
+      <span>// DYNAMIC_SECTOR_WIRE [SECTOR_7B]</span>
+      <span class="animate-pulse text-emerald-400">● LIVE_FEED</span>
     </div>
-    <p class="mb-3">
-      Welcome, operative. You have intercepted the research hub for Dr. Roy Hull's non-linear archives and the escalating saga of <strong class="text-emerald-300 font-bold">Grader Velch</strong>.
-    </p>
-    <p class="text-xs text-slate-400 italic">
-      *Notice: Certain sector logs regarding <span class="redacted px-1 rounded cursor-pointer" title="Hover to unmask">The Great Outer Rim Incident</span> remain classified under Level 4 authority.
+    <p id="sector-wire-text" class="text-slate-300 transition-opacity duration-300 min-h-[2.5rem] flex items-center">
+      Initializing deep-space telemetry interception...
     </p>
   </div>
 
   <!-- Interactive Terminal Console -->
   <div class="bg-slate-950/80 p-3 rounded border border-emerald-500/30 text-xs sm:text-sm font-mono">
-    <!-- Output Scroll Area -->
-    <div id="terminal-output" class="max-h-36 overflow-y-auto space-y-1 mb-2 text-slate-400">
-      <div class="text-emerald-500/80">// Terminal session initialized. Type 'help' for available directives.</div>
+    <div id="terminal-output" class="max-h-40 overflow-y-auto space-y-1 mb-2 text-slate-400">
+      <div class="text-emerald-500/80">// Terminal session initialized. Type 'help' for directives or discover secret commands.</div>
     </div>
 
-    <!-- Active Input Line -->
     <div class="flex items-center gap-2 text-emerald-400 font-bold">
       <span class="text-emerald-500 font-black">&gt;</span>
       <input 
         type="text" 
         id="terminal-input" 
         class="bg-transparent border-none outline-none flex-1 text-emerald-300 font-mono caret-emerald-400 p-0 m-0" 
-        placeholder="Type command..."
+        placeholder="Type command (e.g. 'help', 'matrix', 'velch')..."
         autocomplete="off"
         spellcheck="false"
       />
     </div>
   </div>
 
-  <!-- Interactive Terminal Engine Script -->
-  <script is:inline>
+  <!-- Inject JSON Data into Client Script -->
+  <script is:inline define:vars={{ terminalData }}>
+    // --- Dynamic Sector Wire Engine ---
+    const wireLogs = terminalData.wireLogs;
+    const wireEl = document.getElementById('sector-wire-text');
+    let wireIndex = 0;
+
+    function rotateWireLog() {
+      if (!wireEl) return;
+      wireEl.style.opacity = '0';
+      setTimeout(() => {
+        wireIndex = (wireIndex + 1) % wireLogs.length;
+        wireEl.textContent = wireLogs[wireIndex];
+        wireEl.style.opacity = '1';
+      }, 300);
+    }
+    if (wireEl && wireLogs.length > 0) {
+      wireEl.textContent = wireLogs[0];
+      setInterval(rotateWireLog, 6000);
+    }
+
+    // --- Terminal Engine ---
     const input = document.getElementById('terminal-input');
     const output = document.getElementById('terminal-output');
 
-    // Customized responses for Dr. Roy Hull & Grader Velch lore
-    const velchQuotes = [
-      "VELCH_LOG: 'It wasn't a tactical retreat. I simply preferred fighting from the next star system.'",
-      "VELCH_LOG: 'Mathematically, if I don't check the navigation sensors, the anomaly isn't there.'",
-      "ALERT: Grader Velch has been banned from Sector 4 mess halls due to condiment weaponization.",
-      "SYSTEM_NOTE: Velch's luck index remains statistically impossible. Primary probability algorithms offline."
-    ];
+    const velchQuotes = terminalData.velchQuotes;
+    const hullQuotes = terminalData.hullQuotes;
+    const staticCommands = terminalData.staticCommands;
 
-    const hullQuotes = [
-      "DR_HULL_NOTE: 'Linear storytelling is a crutch for people who fear temporal paradoxes.'",
-      "ACADEMIC_MEMO: Reminding all operatives that Dr. Hull is pronounced BAY-sen. Violators will be reassigned.",
-      "DR_HULL_NOTE: 'If your chapter order makes sense chronologically, you aren't trying hard enough.'"
-    ];
+    function triggerMatrixRain() {
+      const canvas = document.getElementById('matrix-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.style.opacity = '0.85';
 
-    const commands = {
-      'help': "AVAILABLE COMMANDS: 'velch', 'hull', 'status', 'clearance', 'clear', 'about'",
-      'velch': () => velchQuotes[Math.floor(Math.random() * velchQuotes.length)],
-      'hull': () => hullQuotes[Math.floor(Math.random() * hullQuotes.length)],
-      'status': "ALL_SYSTEMS_NOMINAL // DEFCON 4 // DEEP_SPACE_LINK: ACTIVE",
-      'clearance': "YOUR CLEARANCE: LEVEL 2 (GUEST OPERATIVE) // ELEVATION REQUEST: DENIED",
-      'about': "Dr. Besen Roy Hull — Chair of Non-Linear Galactic Narrative Strategy.",
-    };
+      const chars = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ#$&%&*';
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array(Math.floor(columns)).fill(1);
+
+      let frames = 0;
+      const interval = setInterval(() => {
+        ctx.fillStyle = 'rgba(2, 6, 23, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#34d399';
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars.charAt(Math.floor(Math.random() * chars.length));
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+
+        frames++;
+        if (frames > 150) {
+          clearInterval(interval);
+          canvas.style.opacity = '0';
+        }
+      }, 33);
+    }
 
     if (input) {
       input.addEventListener('keydown', function(e) {
@@ -101,21 +140,31 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
           
           if (!rawCmd) return;
 
-          // Append user command to log
           const userLine = document.createElement('div');
           userLine.className = "text-emerald-400 font-bold";
           userLine.textContent = `> ${rawCmd}`;
           output.appendChild(userLine);
 
-          // Process command
-          if (cmd === 'clear') {
+          if (cmd === 'matrix' || cmd === 'rain') {
+            triggerMatrixRain();
+            const respLine = document.createElement('div');
+            respLine.className = "text-emerald-300 font-bold pl-3 border-l border-emerald-500/40";
+            respLine.textContent = "INITIALIZING MATRIX DATA STREAM...";
+            output.appendChild(respLine);
+          } 
+          else if (cmd === 'clear') {
             output.innerHTML = '';
-          } else {
+          } 
+          else {
             const respLine = document.createElement('div');
             respLine.className = "text-slate-300 pl-3 border-l border-emerald-500/40";
             
-            if (commands[cmd]) {
-              respLine.textContent = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+            if (cmd === 'velch' && velchQuotes.length > 0) {
+              respLine.textContent = velchQuotes[Math.floor(Math.random() * velchQuotes.length)];
+            } else if (cmd === 'hull' && hullQuotes.length > 0) {
+              respLine.textContent = hullQuotes[Math.floor(Math.random() * hullQuotes.length)];
+            } else if (staticCommands[cmd]) {
+              respLine.textContent = staticCommands[cmd];
             } else {
               respLine.className = "text-amber-400/90 pl-3 border-l border-amber-500/40";
               respLine.textContent = `ERROR: Command '${rawCmd}' not recognized. Type 'help' for directory.`;
@@ -123,7 +172,6 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
             output.appendChild(respLine);
           }
 
-          // Reset input & auto-scroll
           this.value = '';
           output.scrollTop = output.scrollHeight;
         }
