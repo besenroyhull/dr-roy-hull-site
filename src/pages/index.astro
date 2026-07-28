@@ -6,22 +6,55 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dr. Besen Roy Hull | Official Transmission Hub</title>
-    <!-- Direct CDN fallback to guarantee styled rendering instantly -->
+    <!-- Tailwind CDN for instant utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body style="background-color: #020617; color: #f1f5f9; font-family: monospace; min-height: 100vh; padding: 1.5rem;">
-    <main style="max-width: 42rem; margin: 0 auto; border: 1px solid rgba(16, 185, 129, 0.3); padding: 1.5rem; border-radius: 0.5rem; background-color: rgba(15, 23, 42, 0.6); box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);">
-      <div style="font-size: 0.75rem; color: #10b981; margin-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); padding-bottom: 0.5rem;">
-        // SYSTEM_STATUS: ONLINE // BEACON_ID: #481-B-HULL
+  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen p-4 sm:p-6">
+    <main class="max-w-2xl mx-auto border border-emerald-500/30 p-5 sm:p-6 rounded-lg bg-slate-900/60 shadow-lg shadow-emerald-500/10">
+      
+      <!-- Top Status Bar -->
+      <div class="flex flex-wrap justify-between items-center text-xs text-emerald-500 mb-6 border-b border-emerald-500/20 pb-3 gap-2">
+        <span>// SYSTEM_STATUS: ONLINE</span>
+        <span class="text-emerald-400/70">BEACON_ID: #481-B-HULL</span>
       </div>
-      <h1 style="font-size: 1.875rem; font-weight: 700; color: #34d399; margin-bottom: 0.5rem;">Dr. Besen Roy Hull</h1>
-      <p style="font-size: 0.875rem; color: #94a3b8; margin-bottom: 1.5rem;">Chair of Non-Linear Galactic Narrative Strategy</p>
-      <p style="color: #cbd5e1; line-height: 1.625; margin-bottom: 1.5rem;">
-        Welcome, operative. You have successfully intercepted the official archive and transmission hub for Dr. Roy Hull's speculative fiction, non-linear research notes, and galactic logs.
-      </p>
-      <div style="display: inline-block; background-color: #10b981; color: #020617; font-weight: 700; padding: 0.5rem 1rem; border-radius: 0.25rem; font-size: 0.875rem;">
-        &gt; TRANSMISSION_ESTABLISHED
+
+      <!-- Header Section -->
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold text-emerald-400 tracking-tight mb-1">Dr. Besen Roy Hull</h1>
+        <p class="text-xs sm:text-sm text-slate-400 uppercase tracking-wide">Chair of Non-Linear Galactic Narrative Strategy</p>
+      </header>
+
+      <!-- Tactical Navigation Grid -->
+      <nav class="grid grid-cols-2 gap-2 sm:gap-3 mb-6 text-xs sm:text-sm">
+        <a href="#transmissions" class="border border-emerald-500/30 bg-slate-950/50 hover:bg-emerald-500/10 text-emerald-300 p-2.5 rounded transition-all text-center font-bold">
+          [01_LOGS]
+        </a>
+        <a href="#dossier" class="border border-emerald-500/30 bg-slate-950/50 hover:bg-emerald-500/10 text-emerald-300 p-2.5 rounded transition-all text-center font-bold">
+          [02_DOSSIER]
+        </a>
+        <a href="#faculty" class="border border-emerald-500/30 bg-slate-950/50 hover:bg-emerald-500/10 text-emerald-300 p-2.5 rounded transition-all text-center font-bold">
+          [03_FACULTY]
+        </a>
+        <a href="mailto:theguy@besenroyhull.com" class="border border-emerald-500/30 bg-slate-950/50 hover:bg-emerald-500/10 text-emerald-300 p-2.5 rounded transition-all text-center font-bold">
+          [04_COMM]
+        </a>
+      </nav>
+
+      <!-- Welcome Transmission Block -->
+      <div class="bg-slate-950/80 border-l-2 border-emerald-500 p-4 mb-6 rounded-r text-sm leading-relaxed text-slate-300">
+        <p>
+          Welcome, operative. You have successfully intercepted the official archive and transmission hub for Dr. Roy Hull's speculative fiction, non-linear research notes, and galactic logs.
+        </p>
       </div>
+
+      <!-- Action Button / Footer -->
+      <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+        <div class="inline-block bg-emerald-500 text-slate-950 font-bold px-3 py-1.5 rounded text-xs sm:text-sm">
+          &gt; TRANSMISSION_ESTABLISHED
+        </div>
+        <span class="text-xs text-slate-500 font-mono">v0.0.1</span>
+      </div>
+
     </main>
   </body>
 </html>
