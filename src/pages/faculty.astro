@@ -1,79 +1,33 @@
 ---
 // src/pages/faculty.astro
+import TerminalLayout from '../layouts/TerminalLayout.astro';
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Faculty Dossier | Dr. Besen Roy Hull</title>
-    <!-- is:inline keeps Tailwind CDN active -->
-    <script is:inline src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen p-4 sm:p-6" style="background-color: #020617; color: #f1f5f9; font-family: monospace;">
-    <main class="max-w-2xl mx-auto border border-emerald-500/30 p-5 sm:p-6 rounded-lg bg-slate-900/60 shadow-lg shadow-emerald-500/10" style="max-width: 42rem; margin: 0 auto; border: 1px solid rgba(16, 185, 129, 0.3); padding: 1.5rem; border-radius: 0.5rem; background-color: rgba(15, 23, 42, 0.6);">
-      
-      <!-- Top Bar / Return Link -->
-      <div class="flex flex-wrap justify-between items-center text-xs text-emerald-500 mb-6 border-b border-emerald-500/20 pb-3 gap-2" style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #10b981; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2); padding-bottom: 0.75rem;">
-        <a href="/" style="color: #34d399; text-decoration: none; font-weight: bold;">&lt;&lt; RETURN_TO_TERMINAL</a>
-        <span style="color: rgba(52, 211, 153, 0.7);">CLEARANCE: LEVEL 4-FACULTY</span>
-      </div>
 
-      <!-- Dossier Header -->
-      <header class="mb-6" style="margin-bottom: 1.5rem;">
-        <div style="font-size: 0.75rem; color: #f59e0b; text-transform: uppercase; margin-bottom: 0.25rem;">[ PERSONNEL_DOSSIER: #00481-HULL ]</div>
-        <h1 class="text-3xl font-bold text-emerald-400" style="font-size: 1.875rem; font-weight: 700; color: #34d399; margin: 0;">Dr. Besen Roy Hull</h1>
-        <p style="font-size: 0.875rem; color: #94a3b8; text-transform: uppercase; margin-top: 0.25rem; margin-bottom: 0.75rem;">Chair of Non-Linear Galactic Narrative Strategy</p>
+<TerminalLayout title="Faculty Dossier | Dr. Besen Roy Hull" clearance="CLEARANCE: LEVEL 4-FACULTY">
+  
+  <div class="flex justify-between items-center text-xs text-emerald-500 mb-4">
+    <a href="/" class="text-emerald-400 hover:underline font-bold">&lt;&lt; RETURN_TO_TERMINAL</a>
+  </div>
 
-        <!-- Phonetic Pronunciation Callout -->
-        <div style="font-size: 0.75rem; background-color: rgba(2, 6, 23, 0.6); border-left: 2px solid #f59e0b; padding: 0.5rem 0.75rem; border-radius: 0 0.25rem 0.25rem 0; color: #cbd5e1;">
-          <span style="color: #f59e0b; font-weight: bold;">PRONUNCIATION_NOTE:</span> <code style="color: #34d399;">BAY-sen</code> / /ˈbeɪ.sən/
-          <div style="color: #94a3b8; font-size: 0.7rem; margin-top: 0.25rem; font-style: italic;">
-            *Operatives failing to emphasize the long 'A' will be remanded to sector remediation.
-          </div>
-        </div>
-      </header>
+  <header class="mb-6">
+    <div class="text-xs text-amber-500 uppercase tracking-wider mb-1">[ PERSONNEL_DOSSIER: #00481-HULL ]</div>
+    <h1 class="text-3xl font-bold text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]">Dr. Besen Roy Hull</h1>
+    <p class="text-xs text-slate-400 uppercase tracking-widest mt-1 mb-3">Chair of Non-Linear Galactic Narrative Strategy</p>
 
-      <!-- Faculty Bio Matrix -->
-      <section style="background-color: rgba(2, 6, 23, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 0.375rem; padding: 1.25rem; margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1rem; color: #34d399; border-bottom: 1px solid rgba(16, 185, 129, 0.2); padding-bottom: 0.5rem; margin-top: 0; margin-bottom: 1rem;">// ACADEMIC_SUMMARY</h2>
-        <p style="color: #cbd5e1; font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem;">
-          Dr. Besen Roy Hull currently serves as Chair and Distinguished Fellow of Non-Linear Galactic Narrative Strategy. His primary research focuses on causality paradoxes, space opera narrative dynamics, and the strategic deployment of comedic timing across hyper-dimensional sectors.
-        </p>
-        <p style="color: #cbd5e1; font-size: 0.875rem; line-height: 1.625; margin: 0;">
-          Known for refusing to publish timeline events in chronological order, Dr. Hull's monograph and fiction archives remain essential reading for operatives navigating high-entropy universe sectors.
-        </p>
-      </section>
+    <div class="text-xs bg-slate-950/80 border-l-2 border-amber-500 p-2.5 rounded-r text-slate-300">
+      <span class="text-amber-500 font-bold">PRONUNCIATION_NOTE:</span> <code class="text-emerald-400 font-bold">BAY-sen</code> / /ˈbeɪ.sən/
+      <div class="text-[11px] text-slate-400 italic mt-0.5">*Operatives failing to emphasize the long 'A' will be remanded to sector remediation.</div>
+    </div>
+  </header>
 
-      <!-- Primary Research Focus & Specializations -->
-      <section style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1rem; color: #34d399; margin-bottom: 0.75rem;">// AREAS_OF_SPECIALIZATION</h2>
-        <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 0.875rem; color: #cbd5e1;">
-          <li style="padding: 0.5rem 0.75rem; background-color: rgba(2, 6, 23, 0.4); border-left: 2px solid #10b981; margin-bottom: 0.5rem; border-radius: 0 0.25rem 0.25rem 0;">
-            <strong style="color: #6ee7b7;">Non-Linear Plot Dynamics:</strong> Constructing multi-threaded galactic narratives with temporal structural integrity.
-          </li>
-          <li style="padding: 0.5rem 0.75rem; background-color: rgba(2, 6, 23, 0.4); border-left: 2px solid #10b981; margin-bottom: 0.5rem; border-radius: 0 0.25rem 0.25rem 0;">
-            <strong style="color: #6ee7b7;">Comedic Space Opera Mechanics:</strong> Analyzing absurdism under zero-gravity conditions and multi-species diplomatic miscommunications.
-          </li>
-          <li style="padding: 0.5rem 0.75rem; background-color: rgba(2, 6, 23, 0.4); border-left: 2px solid #10b981; margin-bottom: 0.5rem; border-radius: 0 0.25rem 0.25rem 0;">
-            <strong style="color: #6ee7b7;">Galactic Lore Archiving:</strong> Cataloging planetary anomalies, sector histories, and redacted personnel records.
-          </li>
-        </ul>
-      </section>
+  <section class="bg-slate-950/80 border border-emerald-500/20 rounded p-4 mb-6">
+    <h2 class="text-sm font-bold text-emerald-400 border-b border-emerald-500/20 pb-2 mb-3">// ACADEMIC_SUMMARY</h2>
+    <p class="text-xs text-slate-300 leading-relaxed mb-3">
+      Dr. Besen Roy Hull currently serves as Chair and Distinguished Fellow of Non-Linear Galactic Narrative Strategy. His primary research focuses on causality paradoxes, space opera narrative dynamics, and the strategic deployment of comedic timing across hyper-dimensional sectors.
+    </p>
+    <p class="text-xs text-slate-300 leading-relaxed">
+      Known for refusing to publish timeline events in chronological order, Dr. Hull's monograph and fiction archives remain essential reading for operatives navigating high-entropy universe sectors.
+    </p>
+  </section>
 
-      <!-- Contact Signal -->
-      <section style="background-color: rgba(2, 6, 23, 0.5); border: 1px dashed rgba(16, 185, 129, 0.3); padding: 1rem; border-radius: 0.375rem; margin-bottom: 1.5rem; text-align: center;">
-        <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.5rem;">FACULTY COMMUNICATIONS CHANNEL</div>
-        <a href="mailto:theguy@besenroyhull.com" style="display: inline-block; background-color: #10b981; color: #020617; font-weight: 700; padding: 0.5rem 1rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none;">
-          INITIATE_SIGNAL: theguy@besenroyhull.com
-        </a>
-      </section>
-
-      <!-- Footer -->
-      <footer style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid #1e293b;">
-        <span style="font-size: 0.75rem; color: #64748b;">DOC_ID: DOSSIER-FACULTY-01</span>
-        <span style="font-size: 0.75rem; color: #10b981;">[REDACTED_BY_AUTHORITY]</span>
-      </footer>
-
-    </main>
-  </body>
-</html>
+</TerminalLayout>
