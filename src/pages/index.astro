@@ -1,134 +1,54 @@
 ---
 // src/pages/index.astro
+import TerminalLayout from '../layouts/TerminalLayout.astro';
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dr. Besen Roy Hull | Official Transmission Hub</title>
-    <script is:inline src="https://cdn.tailwindcss.com"></script>
-    <style is:inline>
-      /* CRT & Tactile Effects */
-      .crt-screen {
-        background: radial-gradient(circle at center, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
-        box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15);
-      }
-      .scanlines {
-        background: linear-gradient(
-          to bottom,
-          rgba(255,255,255,0),
-          rgba(255,255,255,0) 50%,
-          rgba(0, 0, 0, 0.35) 50%,
-          rgba(0, 0, 0, 0.35)
-        );
-        background-size: 100% 4px;
-        pointer-events: none;
-      }
-      .terminal-cursor {
-        animation: blink 1s step-end infinite;
-      }
-      @keyframes blink {
-        50% { opacity: 0; }
-      }
-      /* Tactile Switch Buttons */
-      .tactile-switch {
-        box-shadow: 0 4px 0 #064e3b, 0 5px 10px rgba(0,0,0,0.5);
-        transition: all 0.08s ease-in-out;
-      }
-      .tactile-switch:active {
-        transform: translateY(3px);
-        box-shadow: 0 1px 0 #064e3b, 0 2px 5px rgba(0,0,0,0.5);
-      }
-      /* Hover Redaction Reveal */
-      .redacted {
-        background-color: #1e293b;
-        color: #1e293b;
-        user-select: none;
-        transition: all 0.2s ease;
-      }
-      .redacted:hover {
-        background-color: rgba(16, 185, 129, 0.2);
-        color: #34d399;
-      }
-    </style>
-  </head>
-  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen p-3 sm:p-6 flex flex-col justify-center items-center relative overflow-x-hidden" style="background-color: #020617;">
-    
-    <!-- Outer Terminal Hardware Frame -->
-    <main class="w-full max-w-2xl border-2 border-slate-800 rounded-xl p-4 sm:p-7 crt-screen relative overflow-hidden">
-      
-      <!-- Hardware Scanline Overlay Layer -->
-      <div class="absolute inset-0 scanlines opacity-60 z-10"></div>
 
-      <!-- Live Monitor Header & Hardware LEDs -->
-      <div class="relative z-20 flex justify-between items-center text-xs text-emerald-500 mb-6 border-b border-emerald-500/20 pb-3">
-        <div class="flex items-center gap-2">
-          <!-- Pulsing Beacon LED -->
-          <span class="relative flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
-          <span class="font-bold tracking-wider">// SYSTEM_STATUS: ONLINE</span>
-        </div>
-        <span class="text-emerald-400/60 font-mono text-[10px] sm:text-xs">TERMINAL_ID: #481-B-HULL</span>
-      </div>
+<TerminalLayout title="Dr. Besen Roy Hull | Official Transmission Hub" clearance="BEACON_ID: #481-B-HULL">
 
-      <!-- Main Header Section -->
-      <header class="relative z-20 mb-6">
-        <h1 class="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]">
-          Dr. Besen Roy Hull
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-semibold">
-          Chair of Non-Linear Galactic Narrative Strategy
-        </p>
-      </header>
+  <!-- Main Header Section -->
+  <header class="mb-6">
+    <h1 class="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]">
+      Dr. Besen Roy Hull
+    </h1>
+    <p class="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-semibold">
+      Chair of Non-Linear Galactic Narrative Strategy
+    </p>
+  </header>
 
-      <!-- Tactile Navigation Hardware Grid -->
-      <nav class="relative z-20 grid grid-cols-2 gap-3 sm:gap-4 mb-7">
-        <a href="/dossier" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
-          [01_DOSSIER]
-        </a>
-        <a href="/faculty" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
-          [02_FACULTY]
-        </a>
-        <a href="#requisitions" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
-          [03_SUPPLIES]
-        </a>
-        <a href="mailto:theguy@besenroyhull.com" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
-          [04_COMM]
-        </a>
-      </nav>
+  <!-- Tactile Navigation Hardware Grid -->
+  <nav class="grid grid-cols-2 gap-3 sm:gap-4 mb-7">
+    <a href="/dossier" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
+      [01_DOSSIER]
+    </a>
+    <a href="/faculty" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
+      [02_FACULTY]
+    </a>
+    <a href="#requisitions" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
+      [03_SUPPLIES]
+    </a>
+    <a href="mailto:theguy@besenroyhull.com" class="tactile-switch border border-emerald-500/40 bg-slate-900/90 text-emerald-400 hover:text-emerald-300 p-3 rounded text-center font-bold text-xs sm:text-sm tracking-wide">
+      [04_COMM]
+    </a>
+  </nav>
 
-      <!-- Living Terminal Log / Excerpt Box with Classified Redactions -->
-      <div class="relative z-20 bg-slate-950/90 border-l-4 border-emerald-500 p-4 sm:p-5 mb-6 rounded-r shadow-inner text-sm leading-relaxed text-slate-300">
-        <div class="text-[10px] text-amber-500 font-bold tracking-wider mb-2 uppercase">
-          [ INTERCEPTED_SIGNAL // SECTOR_7B ]
-        </div>
-        <p class="mb-3">
-          Welcome, operative. You have intercepted the research hub for Dr. Roy Hull's non-linear archives and the escalating saga of <strong class="text-emerald-300 font-bold">Grader Velch</strong>.
-        </p>
-        <p class="text-xs text-slate-400 italic">
-          *Notice: Certain sector logs regarding <span class="redacted px-1 rounded cursor-pointer" title="Hover to unmask">The Great Outer Rim Incident</span> remain classified under Level 4 authority.
-        </p>
-      </div>
+  <!-- Living Terminal Log / Excerpt Box with Classified Redactions -->
+  <div class="bg-slate-950/90 border-l-4 border-emerald-500 p-4 sm:p-5 mb-6 rounded-r shadow-inner text-sm leading-relaxed text-slate-300">
+    <div class="text-[10px] text-amber-500 font-bold tracking-wider mb-2 uppercase">
+      [ INTERCEPTED_SIGNAL // SECTOR_7B ]
+    </div>
+    <p class="mb-3">
+      Welcome, operative. You have intercepted the research hub for Dr. Roy Hull's non-linear archives and the escalating saga of <strong class="text-emerald-300 font-bold">Grader Velch</strong>.
+    </p>
+    <p class="text-xs text-slate-400 italic">
+      *Notice: Certain sector logs regarding <span class="redacted px-1 rounded cursor-pointer" title="Hover to unmask">The Great Outer Rim Incident</span> remain classified under Level 4 authority.
+    </p>
+  </div>
 
-      <!-- Live Terminal Prompt & Blinking Cursor -->
-      <div class="relative z-20 flex items-center gap-2 text-xs sm:text-sm text-emerald-400 font-bold mb-6 bg-slate-950/60 p-2.5 rounded border border-emerald-500/20">
-        <span class="text-emerald-500 font-black">&gt;</span>
-        <span>AWAITING_INPUT...</span>
-        <span class="terminal-cursor text-emerald-400 font-black">▋</span>
-      </div>
+  <!-- Live Terminal Prompt & Blinking Cursor -->
+  <div class="flex items-center gap-2 text-xs sm:text-sm text-emerald-400 font-bold bg-slate-950/60 p-2.5 rounded border border-emerald-500/20">
+    <span class="text-emerald-500 font-black">&gt;</span>
+    <span>AWAITING_INPUT...</span>
+    <span class="terminal-cursor text-emerald-400 font-black">▋</span>
+  </div>
 
-      <!-- Monitor Footer & System Version -->
-      <footer class="relative z-20 flex items-center justify-between pt-3 border-t border-slate-800 text-xs text-slate-500">
-        <div class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-emerald-500/80 inline-block"></span>
-          <span class="font-mono">SIGNAL_STRENGTH: 99.8%</span>
-        </div>
-        <span class="font-mono text-slate-600">v1.0.4-TACTICAL</span>
-      </footer>
-
-    </main>
-
-  </body>
-</html>
+</TerminalLayout>
