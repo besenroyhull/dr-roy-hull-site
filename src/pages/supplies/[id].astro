@@ -1,0 +1,86 @@
+---
+// src/pages/supplies/[id].astro
+import TerminalLayout from '../../layouts/TerminalLayout.astro';
+import suppliesData from '../../data/suppliesData.json';
+
+// 1. Tell Astro which product pages to generate at build time
+export async function getStaticPaths() {
+  return suppliesData.products.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+
+// 2. Grab the specific product data passed to this page
+const { product } = Astro.props;
+---
+
+<TerminalLayout title={`${product.title} | Sector Requisitions`} clearance={`ITEM_ID: ${product.code}`}>
+  
+  <!-- Breadcrumb / Back Link -->
+  <div class="flex justify-between items-center text-xs text-emerald-500 mb-6 font-mono">
+    <a href="/supplies" class="text-emerald-400 hover:underline font-bold">&lt;&lt; RETURN_TO_DEPOT</a>
+    <span class="text-slate-500">// CATALOG_ENTRY: {product.code}</span>
+  </div>
+
+  <!-- Product Detail Hardware Card -->
+  <div class="bg-slate-950/90 border border-emerald-500/30 rounded-lg p-5 sm:p-7 mb-6 font-mono shadow-2xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      
+      <!-- Product Image / Schematic Placeholder -->
+      <div class="bg-slate-900 border border-slate-800 rounded-md p-4 flex items-center justify-center relative overflow-hidden min-h-[220px]">
+        {product.imageUrl ? (
+          <img src={product.imageUrl} alt={product.title} class="max-h-56 object-contain rounded" />
+        ) : (
+          <div class="text-center p-6 border border-dashed border-slate-700/80 rounded w-full">
+            <div class="text-xs text-amber-500 font-bold mb-1">[ SCHEMATIC_UNAVAILABLE ]</div>
+            <div class="text-[10px] text-slate-500">TACTICAL_SPEC_SHEET: {product.code}</div>
+          </div>
+        )}
+        <div class="absolute top-2 left-2 text-[9px] bg-slate-950/80 border border-emerald-500/30 text-emerald-400 px-1.5 py-0.5 rounded">
+          SEC_CAM_07
+        </div>
+      </div>
+
+      <!-- Product Details & Actions -->
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-[10px] text-amber-400 font-bold bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded">
+            [{product.code}]
+          </span>
+          <span class={product.inStock ? "text-[10px] text-emerald-400 font-bold" : "text-[10px] text-amber-500 font-bold"}>
+            {product.inStock ? "● READY_FOR_DISPATCH" : "▲ PENDING_PUBLICATION"}
+          </span>
+        </div>
+
+        <h1 class="text-2xl font-black text-emerald-400 mb-2">{product.title}</h1>
+        
+        <div class="text-xl font-bold text-slate-200 mb-4 border-b border-slate-800 pb-3">
+          ${product.price} <span class="text-xs font-normal text-slate-500">USD</span>
+        </div>
+
+        <p class="text-xs text-slate-300 leading-relaxed mb-6">
+          {product.description}
+        </p>
+
+        <!-- Checkout Action -->
+        {product.inStock ? (
+          <a 
+            href={product.checkoutUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="tactile-switch bg-emerald-500/20 border border-emerald-500/50 hover:bg-emerald-500/30 text-emerald-300 w-full py-3 rounded font-bold text-xs sm:text-sm tracking-wide no-underline block text-center"
+          >
+            [ INITIATE_REQUISITION // ${product.price} ]
+          </a>
+        ) : (
+          <div class="bg-slate-900 border border-slate-800 text-slate-500 w-full py-3 rounded font-bold text-xs text-center cursor-not-allowed">
+            [ OUT_OF_STOCK // REQUISITION_PAUSED ]
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+
+</TerminalLayout>
