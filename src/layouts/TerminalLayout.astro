@@ -1,6 +1,6 @@
 ---
 // src/layouts/TerminalLayout.astro
-interface Props {
+export interface Props {
   title: string;
   clearance?: string;
 }
@@ -20,51 +20,16 @@ const currentYear = new Date().getFullYear();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind Play CDN (Fail-safe for styling) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              mono: ['"Fira Code"', 'monospace'],
-            }
-          }
-        }
-      }
-    </script>
-
-    <!-- Hardcoded Base Fallback CSS -->
-    <style is:global>
-      html, body {
-        background-color: #020617 !important;
-        color: #f1f5f9 !important;
-        font-family: 'Fira Code', monospace !important;
-        margin: 0;
-        padding: 0;
-      }
-      a {
-        color: #34d399;
-      }
-      .tactile-switch {
-        transition: all 0.2s ease-in-out;
-      }
-      .tactile-switch:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
-      }
-    </style>
   </head>
-  <body class="bg-slate-950 font-mono min-h-screen flex flex-col justify-start items-center p-3 sm:p-6 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen flex flex-col justify-start items-center p-3 sm:p-6 antialiased">
     
-    <!-- Ambient CRT Radial Glow -->
+    <!-- CRT Radial Glow -->
     <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900/40 via-slate-950 to-slate-950 pointer-events-none -z-10"></div>
 
-    <!-- Main Terminal Chassis Container -->
+    <!-- Main Chassis Container -->
     <div class="w-full max-w-3xl bg-slate-950/90 border border-emerald-500/30 rounded-lg shadow-[0_0_25px_rgba(16,185,129,0.08)] flex flex-col min-h-[85vh] my-0">
       
-      <!-- Top System Status Header -->
+      <!-- Top Status Bar -->
       <header class="border-b border-emerald-500/20 bg-slate-900/60 px-4 py-2.5 flex flex-wrap justify-between items-center text-[10px] sm:text-xs font-semibold text-slate-400 gap-2">
         <div class="flex items-center gap-2">
           <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -78,7 +43,7 @@ const currentYear = new Date().getFullYear();
         </div>
       </header>
 
-      <!-- Main Dynamic Content Area -->
+      <!-- Page Content -->
       <main class="p-4 sm:p-8 flex-1 flex flex-col justify-start">
         <slot />
       </main>
