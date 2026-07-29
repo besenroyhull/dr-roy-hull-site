@@ -1,83 +1,102 @@
 ---
 // src/layouts/TerminalLayout.astro
-export interface Props {
-  title: string;
-  clearance?: string;
-}
-
-const { title, clearance = "CLEARANCE: LEVEL_02" } = Astro.props;
-const currentYear = new Date().getFullYear();
+const { title = "Dr. Besen Roy Hull | Official Transmission Hub", clearance = "CLEARANCE: LEVEL 4-TACTICAL" } = Astro.props;
 ---
-
-<!DOCTYPE html>
-<html lang="en" class="bg-slate-950 text-slate-100 min-h-screen">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
+    <style is:inline>
+      .crt-screen {
+        background: radial-gradient(circle at center, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
+        box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15);
+      }
+      .scanlines {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0, 0, 0, 0.35) 50%,
+          rgba(0, 0, 0, 0.35)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+      }
+      .terminal-cursor {
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+      .tactile-switch {
+        box-shadow: 0 4px 0 #064e3b, 0 5px 10px rgba(0,0,0,0.5);
+        transition: all 0.08s ease-in-out;
+      }
+      .tactile-switch:active {
+        transform: translateY(3px);
+        box-shadow: 0 1px 0 #064e3b, 0 2px 5px rgba(0,0,0,0.5);
+      }
+      .redacted {
+        background-color: #1e293b;
+        color: #1e293b;
+        user-select: none;
+        transition: all 0.2s ease;
+      }
+      .redacted:hover {
+        background-color: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+      }
+    </style>
   </head>
-  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen flex flex-col justify-start items-center p-3 sm:p-6 antialiased">
+  <body class="bg-slate-950 text-slate-100 font-mono min-h-screen p-3 sm:p-6 flex flex-col justify-center items-center relative overflow-x-hidden" style="background-color: #020617;">
     
-    <!-- CRT Radial Glow -->
-    <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900/40 via-slate-950 to-slate-950 pointer-events-none -z-10"></div>
-
-    <!-- Main Chassis Container -->
-    <div class="w-full max-w-3xl bg-slate-950/90 border border-emerald-500/30 rounded-lg shadow-[0_0_25px_rgba(16,185,129,0.08)] flex flex-col min-h-[85vh] my-0">
+    <!-- Outer Terminal Hardware Frame -->
+    <main class="w-full max-w-2xl border-2 border-slate-800 rounded-xl p-4 sm:p-7 crt-screen relative overflow-hidden">
       
-      <!-- Top Status Bar -->
-      <header class="border-b border-emerald-500/20 bg-slate-900/60 px-4 py-2.5 flex flex-wrap justify-between items-center text-[10px] sm:text-xs font-semibold text-slate-400 gap-2">
+      <!-- Scanline Overlay -->
+      <div class="absolute inset-0 scanlines opacity-60 z-10"></div>
+
+      <!-- Live Header Bar -->
+      <div class="relative z-20 flex justify-between items-center text-xs text-emerald-500 mb-6 border-b border-emerald-500/20 pb-3">
         <div class="flex items-center gap-2">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-emerald-400 font-bold tracking-wider">BEACON_NODE_7B</span>
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span class="font-bold tracking-wider">// SYSTEM_STATUS: ONLINE</span>
         </div>
-        <div class="text-slate-500 hidden sm:block">
-          STATUS: <span class="text-slate-300">NOMINAL</span>
-        </div>
-        <div class="text-amber-500/90 font-mono tracking-wide">
-          [{clearance}]
-        </div>
-      </header>
+        <span class="text-emerald-400/60 font-mono text-[10px] sm:text-xs">{clearance}</span>
+      </div>
 
-      <!-- Page Content -->
-      <main class="p-4 sm:p-8 flex-1 flex flex-col justify-start">
+      <!-- PAGE CONTENT GOES HERE -->
+      <div class="relative z-20">
         <slot />
-      </main>
+      </div>
 
-      <!-- Footer -->
-      <footer class="border-t border-emerald-500/20 bg-slate-900/40 px-4 py-5 text-xs text-slate-400 font-mono">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-          <div>
-            <div class="text-emerald-400 font-bold text-xs tracking-wide mb-0.5">
-              DR. BESEN ROY HULL
-            </div>
-            <div class="text-[11px] text-slate-400">
-              Chair of Non-Linear Galactic Narrative Strategy
-            </div>
-            <div class="text-[10px] text-slate-500 mt-1">
-              © {currentYear} Dr. Besen Roy Hull. All rights reserved across timelines.
-            </div>
-          </div>
-
-          <nav class="flex flex-wrap gap-3 text-[11px]">
-            <a href="/dossier" class="text-slate-400 hover:text-emerald-400 transition-colors no-underline">[DOSSIER]</a>
-            <a href="/faculty" class="text-slate-400 hover:text-emerald-400 transition-colors no-underline">[FACULTY]</a>
-            <a href="/supplies" class="text-slate-400 hover:text-emerald-400 transition-colors no-underline">[SUPPLIES]</a>
-            <a href="mailto:theguy@besenroyhull.com" class="text-slate-400 hover:text-emerald-400 transition-colors no-underline">[COMM]</a>
-          </nav>
+      <!-- Monitor Footer -->
+      <footer class="relative z-20 flex items-center justify-between pt-5 mt-6 border-t border-slate-800 text-xs text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-emerald-500/80 inline-block animate-pulse"></span>
+          <span class="font-mono">SIGNAL_STRENGTH: <span id="signal-strength">88.4</span>%</span>
         </div>
-
-        <div class="pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center text-[10px] text-slate-500 gap-2">
-          <span>HOSTED_ON: CLOUDFLARE_EDGE_NETWORK</span>
-          <span>SEC_PROTOCOL: LEVEL_4_ENCRYPTED</span>
-        </div>
+        <span class="font-mono text-slate-600">v1.0.4-TACTICAL</span>
       </footer>
 
-    </div>
+    </main>
 
+    <!-- Live Fluctuating Signal Script -->
+    <script is:inline>
+      setInterval(() => {
+        const signalEl = document.getElementById('signal-strength');
+        if (signalEl) {
+          // Generates a fluctuating number roughly between 84.0% and 92.5%
+          const base = 88.0;
+          const fluctuation = (Math.random() * 8.5) - 4.0; 
+          signalEl.textContent = (base + fluctuation).toFixed(1);
+        }
+      }, 3000); // Updates every 3 seconds
+    </script>
   </body>
 </html>
