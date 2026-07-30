@@ -35,8 +35,29 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
   <!-- Intercepted Files Grid -->
   <section class="mb-6">
     <h2 class="text-xs sm:text-sm font-bold text-emerald-400 mb-3">// INTERCEPTED_DOSSIERS</h2>
-    
-    <!-- File Entry 1 -->
+
+    <!-- File Entry 1 (With Audio Fragment) -->
+    <div class="mb-3 p-3.5 bg-slate-950/60 border-l-4 border-amber-500 rounded-r border-t border-b border-r border-slate-800/80">
+      <div class="flex justify-between items-center text-[10px] sm:text-xs text-amber-500 font-bold mb-1">
+        <span>[ FILE_081-C ]</span>
+        <span class="tracking-wider">STATUS: DECLASSIFIED</span>
+      </div>
+      <h3 class="text-sm font-bold text-emerald-300 mb-1">Incident Report: Vectorlances Over Vela</h3>
+      <p class="text-xs text-slate-400 leading-normal mb-2">
+        Field notes on an emergency de-orbit from an orbital Eclipse-class War Carrier, resulting in terminal-velocity free-fall amidst heavy energy fire.
+      </p>
+      
+      <!-- Audio Fragment -->
+      <div class="bg-slate-900/90 p-2.5 rounded border border-slate-800 text-[11px] font-mono space-y-1">
+        <div class="text-[10px] text-amber-500 font-bold uppercase">// BLACKBOX_AUDIO_FRAGMENT</div>
+        <p><strong class="text-emerald-400">VELCH:</strong> "Mathematically speaking, as long as the heavy vectorlances are firing at the ground, they aren't firing at us!"</p>
+        <p><strong class="text-slate-400">COMMAND:</strong> "Velch, you are falling from thirty thousand meters with war carrier fire raining past your face!"</p>
+        <p><strong class="text-emerald-400">VELCH:</strong> "I know! Magnificent view, isn't it?"</p>
+      </div>
+    </div>
+
+
+    <!-- File Entry 2 -->
     <div class="mb-3 p-3.5 bg-slate-950/60 border-l-4 border-amber-500 rounded-r border-t border-b border-r border-slate-800/80">
       <div class="flex justify-between items-center text-[10px] sm:text-xs text-amber-500 font-bold mb-1">
         <span>[ FILE_081-A ]</span>
@@ -48,7 +69,7 @@ import TerminalLayout from '../layouts/TerminalLayout.astro';
       </p>
     </div>
 
-    <!-- File Entry 2 -->
+    <!-- File Entry 3 -->
     <div class="mb-3 p-3.5 bg-slate-950/60 border-l-4 border-emerald-500 rounded-r border-t border-b border-r border-slate-800/80">
       <div class="flex justify-between items-center text-[10px] sm:text-xs text-emerald-500 font-bold mb-1">
         <span>[ FILE_081-B ]</span>
